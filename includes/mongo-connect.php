@@ -11,10 +11,13 @@
 	$dbname = 'looma';
 
     try {
-    //	$m = new MongoClient("mongodb://$dbhost");
-    	$m = new MongoClient();    //make a new mongo client object
+    	$m = new MongoClient("mongodb://127.0.0.1:27017");
+    	//$m = new MongoClient();    //make a new mongo client object
         //use below FORMAT for PHP later than 5.5??
         //$m = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+        
+        //todo to try: $loomaDB =  $m->selectDB('looma');
+        
        	$loomaDB = $m -> $dbname;  //connect to the database "looma"
                                    //make query variables for all collections
         $activities_collection = $loomaDB -> activities;
@@ -44,6 +47,7 @@
     }
     catch(MongoConnectionException $e)
     {
+        echo phpinfo();
         echo "MongoConnectError connecting to MongoDB. Make sure MongoDB is running";
         exit();
     };
